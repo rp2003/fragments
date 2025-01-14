@@ -11,5 +11,8 @@
     "url": "git+https://github.com/rp2003/fragments.git"
   },
   "author": "Riya",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "prettier": "3.4.2"
+  }
 }
