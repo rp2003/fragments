@@ -40,4 +40,8 @@ jobs:
         run: npm ci
 
       - name: Run ESLint
+<<<<<<< HEAD
         run: npm run lint
+=======
+        run: npm run lint
+>>>>>>> a82f99319f062aafba916e2887cdaa7a67610e35
