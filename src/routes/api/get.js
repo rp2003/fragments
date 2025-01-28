@@ -1,13 +1,13 @@
 // src/routes/api/get.js
 
+// Import the success response helper
+const { createSuccessResponse } = require('../../response');
+
+
 /**
  * Get a list of fragments for the current user
  */
 module.exports = (req, res) => {
-    // TODO: this is just a placeholder. To get something working, return an empty array...
-    res.status(200).json({
-      status: 'ok',
-      // TODO: change me
-      fragments: [],
-    });
-  };
+  // Placeholder implementation: return an empty array for now
+  res.status(200).json(createSuccessResponse({ fragments: [] }));
+};
