@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     logger.info(`Received POST request from user ${req.user ? req.user.id : 'unknown'}`);
 
     // Extract ownerId and fragData from request
-    const ownerId = req.user ? req.user.id : null;  // Assuming req.user contains user info
+    const ownerId = req.user;  // Assuming req.user contains user info
     const fragData = req.body;  // Assuming the fragment data is in the body (Buffer)
 
     if (!ownerId) {
