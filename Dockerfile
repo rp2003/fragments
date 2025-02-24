@@ -37,12 +37,18 @@ ENV PORT=8080 \
 # Use the working directory
 WORKDIR /app
 
+# Copy package.json and package-lock.json files into the image
+# Copy only package files first for better caching
+COPY package*.json ./
+
+
 # Copy the installed node_modules from the build stage
 COPY --from=build /app/node_modules ./node_modules
 
 # Copy only necessary application files to the production image
 COPY ./src ./src
 
+COPY ./tests/.htpasswd ./tests/.htpasswd
 
 # Health check for the service
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
