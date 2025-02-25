@@ -1,26 +1,23 @@
-# Dockerfile for Fragments Microservice
-
-# node version
+# Stage 1: Build Stage
 FROM node:22-alpine AS build
 
 # Setting Environment var to production
-ENV NODE_ENV = production
+ENV NODE_ENV=production
 
-# Set the working directory inside the container to /app
+# Create a non-root user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json files into the image
-# Copy only package files first for better caching
+# Copy package.json and package-lock.json files
 COPY package*.json ./
 
 # Install dependencies
 RUN npm ci --only=production
 
-# Copy src to /app/src/
-# Copy source file
+# Copy source files
 COPY ./src ./src
-
 
 # Stage 2: Production Stage
 FROM node:22-alpine AS production
@@ -29,33 +26,32 @@ FROM node:22-alpine AS production
 LABEL maintainer="rp2003 <22riyapuri@gmail.com>"
 LABEL description="Fragments node.js microservice"
 
-# Set environment variables for the service
+# Set environment variables
 ENV PORT=8080 \
     NPM_CONFIG_LOGLEVEL=warn \
     NPM_CONFIG_COLOR=false
 
-# Use the working directory
+# Create a non-root user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json files into the image
-# Copy only package files first for better caching
-COPY package*.json ./
-
-
-# Copy the installed node_modules from the build stage
+# Copy built artifacts and dependencies from the build stage
 COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/src ./src
 
-# Copy only necessary application files to the production image
-COPY ./src ./src
+# Copy additional necessary files with correct ownership
+COPY --chown=appuser:appgroup ./tests/.htpasswd ./tests/.htpasswd
 
-COPY ./tests/.htpasswd ./tests/.htpasswd
+# Switch to the non-root user
+USER appuser
 
-# Health check for the service
+# Health check command
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl --fail http://localhost:8080/ || exit 1
 
-# We run our service on port 8080
-# Expose the service port
+# Expose the application port
 EXPOSE 8080
 
 # Start the application
