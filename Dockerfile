@@ -41,6 +41,9 @@ WORKDIR /app
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/src ./src
 
+# Copy package.json and package-lock.json from the build stage
+COPY --from=build /app/package*.json ./
+
 # Copy additional necessary files with correct ownership
 COPY --chown=appuser:appgroup ./tests/.htpasswd ./tests/.htpasswd
 
