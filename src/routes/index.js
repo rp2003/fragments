@@ -37,8 +37,4 @@ router.get('/', (req, res) => {
   res.status(200).json(response);
 });
 
-
-
-
-
 module.exports = router;
