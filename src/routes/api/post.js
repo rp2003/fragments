@@ -3,35 +3,47 @@ const { Fragment } = require('../../model/fragment');
 const logger = require('../../logger');
 
 module.exports = async (req, res) => {
+  logger.info(`Received POST request from user ${req.user}`);
+  const { user: ownerId } = req;
+  const contentType = req.get('Content-Type');
+
+  // Check if the Content-Type is supported
+  if (!Fragment.isSupportedType(contentType)) {
+    logger.warn(`Unsupported media type: ${contentType}`);
+    return res.status(415).json(createErrorResponse(415, 'The content format for fragment (supplied by client) is not supported!!'));
+  }
+
   try {
-    logger.debug('Post: ' + req.body);
-    logger.info(`Received POST request from user ${req.user ? req.user.id : 'unknown'}`);
-
-    // Extract ownerId and fragData from request
-    const ownerId = req.user;  // Assuming req.user contains user info
-    const fragData = req.body;  // Assuming the fragment data is in the body (Buffer)
-
-    if (!ownerId) {
-      logger.error('Owner ID is missing');
-      return res.status(400).json(createErrorResponse(400, 'Owner ID is missing'));
-    }
-
-    if (!fragData) {
-      logger.error('Fragment data is missing');
-      return res.status(400).json(createErrorResponse(400, 'Fragment data is missing'));
+    // Handle different content types
+    let fragData;
+    if (contentType.startsWith('image/')) {
+      fragData = Buffer.from(req.body);
+    } else {
+      // For text-based content types
+      fragData = contentType === 'text/plain' ||
+        contentType === 'text/plain; charset=utf-8' ||
+        contentType === 'text/markdown' ||
+        contentType === 'text/markdown; charset=utf-8' ||
+        contentType === 'text/html' ||
+        contentType === 'text/csv'
+        ? req.body
+        : JSON.stringify(req.body);
     }
 
     logger.debug('Attempting to create a new fragment');
-
-    const fragment = new Fragment({ ownerId, type: req.get('Content-Type') });
+    const fragment = new Fragment({ ownerId, type: contentType });
     await fragment.save();
-    await fragment.setData(fragData);
 
-    res.set('Content-Type', fragment.type);
+    // Ensure fragData is a Buffer for all content types
+    const dataBuffer = Buffer.isBuffer(fragData)
+      ? fragData
+      : Buffer.from(fragData);
+    await fragment.setData(dataBuffer);
+
+    logger.info(`Fragment metadata and data saved. Owner: ${ownerId}, ID: ${fragment.id}, Size: ${fragment.size} bytes`);
 
     const locationURL = `${req.protocol}://${req.headers.host}/v1/fragments/${fragment.id}`;
     res.set('Location', locationURL);
-    logger.debug(`Location header set: ${locationURL}`);
 
     res.status(201).location(locationURL).json(
       createSuccessResponse({
@@ -42,13 +54,12 @@ module.exports = async (req, res) => {
           updated: fragment.updated,
           type: fragment.type,
           size: fragment.size,
-        }
+        },
       })
     );
-    
     logger.info(`Fragment created successfully for user ${ownerId}, ID: ${fragment.id}`);
   } catch (error) {
-    logger.error(`Error occurred while creating fragment for user ${req.user ? req.user.id : 'unknown'}: ${error.message}`);
+    logger.error(`Error occurred while creating fragment for user ${ownerId}: ${error.message}`);
     res.status(500).json(createErrorResponse(500, error.message));
   }
 };

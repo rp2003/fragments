@@ -6,12 +6,11 @@ const wait = async (ms = 50) => new Promise((resolve) => setTimeout(resolve, ms)
 
 const validTypes = [
   `text/plain`,
-  /*
-   Currently, only text/plain is supported. Others will be added later.
-
+  
   `text/markdown`,
   `text/html`,
   `application/json`,
+  /*
   `image/png`,
   `image/jpeg`,
   `image/webp`,
@@ -209,7 +208,7 @@ describe('Fragment class', () => {
       expect(Date.parse(fragment2.updated)).toBeGreaterThan(Date.parse(modified1));
     });
 
-    /*test("a fragment is added to the list of a user's fragments", async () => {
+    test("a fragment is added to the list of a user's fragments", async () => {
       const data = Buffer.from('hello');
       const ownerId = '5555';
       const fragment = new Fragment({ ownerId, type: 'text/plain', size: 0 });
@@ -217,9 +216,9 @@ describe('Fragment class', () => {
       await fragment.setData(data);
 
       expect(await Fragment.byUser(ownerId)).toEqual([fragment.id]);
-    });*/
+    });
 
-    /*test('full fragments are returned when requested for a user', async () => {
+    test('full fragments are returned when requested for a user', async () => {
       const data = Buffer.from('hello');
       const ownerId = '6666';
       const fragment = new Fragment({ ownerId, type: 'text/plain', size: 0 });
@@ -227,7 +226,7 @@ describe('Fragment class', () => {
       await fragment.setData(data);
 
       expect(await Fragment.byUser(ownerId, true)).toEqual([fragment]);
-    });*/
+    });
 
     test('setData() throws if not give a Buffer', () => {
       const fragment = new Fragment({ ownerId: '123', type: 'text/plain', size: 0 });

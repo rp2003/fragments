@@ -14,10 +14,18 @@ const {
   deleteFragment,
 } = require('./data');
 
-const validTypes = ['text/plain'];
+const validTypes = [
+  'text/plain',
+  `text/markdown`,
+  `text/html`,
+  `application/json`,
+];
 
 const formats = {
   'text/plain': ['text/plain'],
+  'text/markdown': ['text/markdown', 'text/html', 'text/plain'],
+  'text/html': ['text/html', 'text/plain'],
+  'application/json': ['application/json', 'text/plain'],
 };
 
 class Fragment {
