@@ -17,7 +17,7 @@ const {
 const validTypes = [
   'text/plain',
   `text/markdown`,
-  `text/html`,
+  `text/html`,    
   `application/json`,
 ];
 
@@ -94,7 +94,8 @@ class Fragment {
   static async byId(ownerId, id) {
     let data = await readFragment(ownerId, id);
     if (!data) {
-      return Promise.reject(new Error('Not Found'));
+      // return Promise.reject(new Error('Not Found'));
+      return null;
     }
       
     // Ensure the fragment is instantiated
@@ -179,5 +180,5 @@ class Fragment {
   }
 }
 
-//module.exports.Fragment = Fragment;
-module.exports = { Fragment };
+module.exports.Fragment = Fragment;
+// //module.exports = { Fragment };

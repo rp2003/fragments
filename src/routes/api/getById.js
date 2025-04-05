@@ -1,15 +1,16 @@
-const { Fragment } = require('../../model/fragment');
 const { createErrorResponse } = require('../../response');
+const { Fragment } = require('../../model/fragment');
 const logger = require('../../logger');
 
 module.exports = async (req, res) => {
-  const { user: ownerId } = req;
-  const { id } = req.params;
-
   try {
+    const { user: ownerId } = req;
+    const { id } = req.params;
+
     logger.info(`Fetching fragment by ID: ${id}`);
 
     const fragment = await Fragment.byId(ownerId, id);
+    logger.debug(`Fragment result: ${JSON.stringify(fragment)}`);
 
     if (!fragment) {
       logger.warn(`Fragment not found for ID: ${id}`);
@@ -17,24 +18,21 @@ module.exports = async (req, res) => {
     }
 
     try {
-      // Get the actual fragment data instead of metadata
       const data = await fragment.getData();
+      logger.debug(`Fragment data received, length: ${data.length}`);
 
-      // Set the proper Content-Type header based on the fragment's type
-      res.setHeader('Content-Type', fragment.type);
-      // Set the Content-Length header
-      res.setHeader('Content-Length', fragment.size);
+      res.setHeader('Content-Type', fragment.type || 'application/octet-stream');
+      res.setHeader('Content-Length', fragment.size || Buffer.byteLength(data));
 
-      // Send the actual fragment data
-      res.status(200).send(data);
-
-      logger.info(`Successfully sent fragment data for ID: ${id}`);
+      logger.info(`Successfully sending data for fragment ${id}`);
+      return res.status(200).send(data);
     } catch (dataError) {
-      logger.error(`Error retrieving fragment data with ID ${id}: ${dataError.message}`, { error: dataError });
-      res.status(404).json(createErrorResponse(404, 'An error occurred while retrieving fragment data'));
+      logger.error(`getData() failed for ID ${id}: ${dataError.message}`, { error: dataError.stack });
+      return res.status(404).json(createErrorResponse(404, 'An error occurred while retrieving fragment data'));
     }
   } catch (error) {
-    logger.error(`Error fetching fragment with ID ${id}: ${error.message}`, { error });
-    res.status(500).json(createErrorResponse(500, 'An error occurred while fetching the fragment'));
+    logger.error(`Unexpected error: ${error.message}`, { error: error.stack });
+    return res.status(500).json(createErrorResponse(500, 'An error occurred while fetching the fragment'));
   }
 };
+
