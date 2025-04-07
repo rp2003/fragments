@@ -37,7 +37,8 @@ async function listFragments(ownerId, expand = false) {
   const parsedFragments = fragments.map((fragment) => JSON.parse(fragment));
 
   // If we don't get anything back, or are supposed to give expanded fragments, return
-  if (expand || !fragments) {
+ // if (expand || !fragments) {
+  if (expand) {
     return parsedFragments;
   }
 

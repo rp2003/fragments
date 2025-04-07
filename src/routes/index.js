@@ -14,6 +14,8 @@ const { authenticate } = require('../auth');
 // Create a router that we can use to mount our API
 const router = express.Router();
 
+const { hostname } = require('os');
+
 /* Expose all of our API routes on /v1/ to include an API version.
  * Protect them all with middleware so you have to be authenticated
  * in order to access things.
@@ -36,5 +38,20 @@ router.get('/', (req, res) => {
   });
   res.status(200).json(response);
 });
+
+
+
+router.get('/', (req, res) => {
+  res.setHeader('Cache-Control', 'no-cache');
+  res.status(200).json(
+    createSuccessResponse({
+      author: 'Riya Puri',
+      githubUrl: 'https://github.com/riyapuri123/fragments',
+      version,
+      hostname: hostname(), // This line adds the ECS host ID
+    })
+  );
+});
+
 
 module.exports = router;
