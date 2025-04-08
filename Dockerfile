@@ -55,7 +55,8 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl --fail http://localhost:8080/ || exit 1
 
 # Expose the application port
-EXPOSE 8080
+#EXPOSE 8080
+EXPOSE 80
 
 # Start the application
 CMD ["npm", "start"]
