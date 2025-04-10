@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:453269240209:task-definition/fragments-task:8",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:453269240209:task-definition/fragments-task:9",
     "containerDefinitions": [
         {
             "name": "fragments-container",
-            "image": "453269240209.dkr.ecr.us-east-1.amazonaws.com/fragments:v0.7.8",
+            "image": "453269240209.dkr.ecr.us-east-1.amazonaws.com/fragments:v0.7.9",
             "cpu": 256,
             "memory": 512,
             "portMappings": [
@@ -19,7 +19,7 @@
             "environment": [
                 {
                     "name": "AWS_COGNITO_POOL_ID",
-                    "value": ""
+                    "value": "us-east-1_Izimz8AVS"
                 },
                 {
                     "name": "AWS_REGION",
@@ -51,7 +51,7 @@
                 },
                 {
                     "name": "AWS_COGNITO_CLIENT_ID",
-                    "value": ""
+                    "value": "1d40mjvhkhq5meq3o1c6ccr3o6"
                 }
             ],
             "mountPoints": [],
@@ -74,7 +74,7 @@
     "taskRoleArn": "arn:aws:iam::453269240209:role/LabRole",
     "executionRoleArn": "arn:aws:iam::453269240209:role/LabRole",
     "networkMode": "awsvpc",
-    "revision": 8,
+    "revision": 9,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -123,7 +123,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2025-04-08T05:33:15.659Z",
+    "registeredAt": "2025-04-09T22:59:54.365Z",
     "registeredBy": "arn:aws:sts::453269240209:assumed-role/voclabs/user3768910=riya2@myseneca.ca",
     "enableFaultInjection": false,
     "tags": []
