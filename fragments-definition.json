@@ -26,10 +26,6 @@
                     "value": "us-east-1"
                 },
                 {
-                    "name": "API_URL",
-                    "value": ""
-                },
-                {
                     "name": "PORT",
                     "value": "80"
                 },
