@@ -46,7 +46,7 @@ router.get('/', (req, res) => {
   res.status(200).json(
     createSuccessResponse({
       author: 'Riya Puri',
-      githubUrl: 'https://github.com/riyapuri123/fragments',
+      githubUrl: 'https://github.com/rp2003/fragments',
       version,
       hostname: hostname(), // This line adds the ECS host ID
     })

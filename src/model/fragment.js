@@ -20,6 +20,10 @@ const validTypes = [
   `text/markdown`,
   `text/html`,    
   `application/json`,
+  `image/png`,
+  `image/jpeg`,
+  `image/webp`,
+  `image/gif`,
 ];
 
 const formats = {
@@ -27,6 +31,10 @@ const formats = {
   'text/markdown': ['text/markdown', 'text/html', 'text/plain'],
   'text/html': ['text/html', 'text/plain'],
   'application/json': ['application/json', 'text/plain'],
+  'image/png': ['image/png', 'image/jpeg', 'image/webp', 'image/gif'],
+  'image/jpeg': ['image/png', 'image/jpeg', 'image/webp', 'image/gif'],
+  'image/webp': ['image/png', 'image/jpeg', 'image/webp', 'image/gif'],
+  'image/gif': ['image/png', 'image/jpeg', 'image/webp', 'image/gif'],
 };
 
 class Fragment {
@@ -182,6 +190,6 @@ class Fragment {
 }
 
 module.exports.Fragment = Fragment;
-// //module.exports = { Fragment };
+
 
 
