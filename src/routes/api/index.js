@@ -29,7 +29,10 @@ router.get('/fragments', require('./get'));
 router.get('/fragments/:id.:ext', require('./getById'));
 
 // PUT /v1/fragments/:id.newExt
-router.put('/fragments/:id.:ext', rawBody(), require('./put'));
+//router.put('/fragments/:id.:ext', rawBody(), require('./put'));
+// PUT /v1/fragments/:id
+router.put('/fragments/:id', rawBody(), require('./put'));
+
 
 // GET /v1/fragments/:id/info
 router.get('/fragments/:id/info', require('./getByInfo'));
