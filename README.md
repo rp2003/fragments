@@ -49,7 +49,7 @@ fragments-backend/
 ### **1. Clone the Repository**
 ```bash
 git clone https://github.com/YOUR_USERNAME/fragments.git
-cd fragments
+cd fragments```
 
 2. Setup & Installation
 Initialize Project
@@ -132,4 +132,5 @@ Helmet — Secures HTTP headers
 Compression — Improves response speed
 
 CORS — Cross-origin resource sharing
+
 
