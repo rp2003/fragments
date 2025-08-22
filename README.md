@@ -1,11 +1,139 @@
-# fragments
-My First Cloud Project
+#Fragments Backend API
 
-npm run lint: It is used to check the js files in the source folder.
-npm start: It will run the server and give provide us with the info about host, port no., process Id.
-npm run dev: It will run the server and will update the server automatically when there is change in the any file.
-npm run debug: It will run the server in the debug mode.
-Ctrl + c: to stop the running server.
+A Node.js backend API for the Fragments project.
+This server is built with Express, Pino for structured logging, and includes automated linting, code formatting, and development tooling to ensure clean, consistent, and production-ready code.
 
-The project uses LOG_LEVEL=debug for logging during development and debugging.
-nodemon is used to automatically restart the server if there are any changes in the files.
+Table of Contents
+
+Features
+
+Project Structure
+
+Getting Started
+
+1. Clone the Repository
+
+2. Setup & Installation
+
+3. Development
+
+Logging
+
+Scripts
+
+Technologies
+
+Contributing
+
+License
+
+Features
+
+REST API powered by Express
+
+Structured JSON Logging with Pino
+
+Prettier for automatic code formatting
+
+ESLint for linting and enforcing clean coding standards
+
+Cross-platform scripts for easy development (cross-env & nodemon)
+
+Project Structure
+fragments-backend/
+├── src/
+│   ├── app.js        # Express app configuration and routes
+│   ├── logger.js     # Pino logger configuration
+│   └── server.js     # Entry point for starting the server
+├── .vscode/          # VSCode workspace settings
+├── .prettierrc       # Prettier configuration
+├── eslint.config.mjs # ESLint configuration
+├── package.json
+└── README.md
+
+Getting Started
+1. Clone the Repository
+git clone https://github.com/YOUR_USERNAME/fragments.git
+cd fragments
+
+2. Setup & Installation
+Initialize Project
+npm init -y
+
+Install Dependencies
+# Core dependencies
+npm install express cors helmet compression
+
+# Logging
+npm install pino pino-pretty pino-http
+
+# Development tools
+npm install --save-dev eslint prettier cross-env nodemon
+
+Configure Prettier
+
+Create a .prettierrc file:
+
+{
+  "arrowParens": "always",
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "printWidth": 100
+}
+
+
+Create .prettierignore:
+
+node_modules/
+package.json
+package-lock.json
+
+3. Development
+Run Linter
+npm run lint
+
+Start Server (Development Mode)
+npm run dev
+
+Debug Mode
+npm run debug
+
+Run Server (Production)
+npm start
+
+Logging
+
+The project uses Pino for structured logging.
+
+Default log level: info
+
+Debug mode (LOG_LEVEL=debug) enables pretty-printed logs for easier local debugging.
+Logger is configured in src/logger.js
+.
+
+Example log output:
+
+{"level":30,"time":1692626400000,"msg":"Server started on port 8080"}
+
+Scripts
+Command	Description
+npm run lint	Lint all .js files under src/
+npm run dev	Start server in dev mode with nodemon
+npm run debug	Start dev mode with debugging enabled
+npm start	Start server in production mode
+Technologies
+
+Node.js & Express — Backend framework
+
+Pino — Structured logging
+
+Prettier — Automatic code formatting
+
+ESLint — Enforces code quality
+
+Helmet — Secures HTTP headers
+
+Compression — Improves response speed
+
+CORS — Cross-origin resource sharing
