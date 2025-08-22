@@ -1,58 +1,53 @@
-#Fragments Backend API
+# **Fragments Backend API**
 
-A Node.js backend API for the Fragments project.
-This server is built with Express, Pino for structured logging, and includes automated linting, code formatting, and development tooling to ensure clean, consistent, and production-ready code.
+A Node.js backend API for the **Fragments** project.  
+This server is built with **Express**, **Pino** for structured logging, and includes automated linting, code formatting, and development tooling to ensure clean, consistent, and production-ready code.
 
-Table of Contents
+---
 
-Features
+## **Table of Contents**
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+  - [1. Clone the Repository](#1-clone-the-repository)
+  - [2. Setup & Installation](#2-setup--installation)
+  - [3. Development](#3-development)
+- [Logging](#logging)
+- [Scripts](#scripts)
+- [Technologies](#technologies)
+- [Contributing](#contributing)
+- [License](#license)
 
-Project Structure
+---
 
-Getting Started
+## **Features**
+- REST API powered by **Express**
+- **Structured JSON Logging** with [Pino](https://getpino.io/)
+- **Prettier** for automatic code formatting
+- **ESLint** for linting and enforcing clean coding standards
+- Cross-platform scripts for easy development with `cross-env` & `nodemon`
 
-1. Clone the Repository
+---
 
-2. Setup & Installation
-
-3. Development
-
-Logging
-
-Scripts
-
-Technologies
-
-Contributing
-
-License
-
-Features
-
-REST API powered by Express
-
-Structured JSON Logging with Pino
-
-Prettier for automatic code formatting
-
-ESLint for linting and enforcing clean coding standards
-
-Cross-platform scripts for easy development (cross-env & nodemon)
-
-Project Structure
+## **Project Structure**
 fragments-backend/
 ├── src/
-│   ├── app.js        # Express app configuration and routes
-│   ├── logger.js     # Pino logger configuration
-│   └── server.js     # Entry point for starting the server
-├── .vscode/          # VSCode workspace settings
-├── .prettierrc       # Prettier configuration
+│ ├── app.js # Express app configuration and routes
+│ ├── logger.js # Pino logger configuration
+│ └── server.js # Entry point for starting the server
+├── .vscode/ # VSCode workspace settings
+├── .prettierrc # Prettier configuration
 ├── eslint.config.mjs # ESLint configuration
 ├── package.json
 └── README.md
 
-Getting Started
-1. Clone the Repository
+
+---
+
+## **Getting Started**
+
+### **1. Clone the Repository**
+```bash
 git clone https://github.com/YOUR_USERNAME/fragments.git
 cd fragments
 
@@ -137,3 +132,4 @@ Helmet — Secures HTTP headers
 Compression — Improves response speed
 
 CORS — Cross-origin resource sharing
+
