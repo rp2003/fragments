@@ -49,26 +49,32 @@ fragments-backend/
 ### **1. Clone the Repository**
 ```bash
 git clone https://github.com/YOUR_USERNAME/fragments.git
-cd fragments```
-
-2. Setup & Installation
-Initialize Project
+cd fragments
+```
+### ** 2. Setup & Installation**
+# Initialize Project
+```bash
 npm init -y
-
-Install Dependencies
+```
+### ** Install Dependencies**
 # Core dependencies
+```bash
 npm install express cors helmet compression
-
+```
 # Logging
+```bash
 npm install pino pino-pretty pino-http
+```
 
 # Development tools
+```bash
 npm install --save-dev eslint prettier cross-env nodemon
+```
 
-Configure Prettier
+## ** Configure Prettier**
 
-Create a .prettierrc file:
-
+# Create a .prettierrc file:
+```bash
 {
   "arrowParens": "always",
   "singleQuote": true,
@@ -76,31 +82,38 @@ Create a .prettierrc file:
   "trailingComma": "es5",
   "printWidth": 100
 }
+```
 
-
-Create .prettierignore:
-
+# Create .prettierignore:
+```bash
 node_modules/
 package.json
 package-lock.json
+```
+## **3. Development **
 
-3. Development
-Run Linter
+# Run Linter
+```bash
 npm run lint
-
-Start Server (Development Mode)
+```
+# Start Server (Development Mode)
+```bash
 npm run dev
-
-Debug Mode
+```
+# Debug Mode
+```bash
 npm run debug
+```
 
-Run Server (Production)
+# Run Server (Production)
+```bash
 npm start
+```
 
-Logging
+## ** Logging **
 
 The project uses Pino for structured logging.
-
+```bash
 Default log level: info
 
 Debug mode (LOG_LEVEL=debug) enables pretty-printed logs for easier local debugging.
@@ -110,27 +123,23 @@ Logger is configured in src/logger.js
 Example log output:
 
 {"level":30,"time":1692626400000,"msg":"Server started on port 8080"}
+```
+## ** Scripts**
+# Command	Description
+* npm run lint	Lint all .js files under src/
+* npm run dev	Start server in dev mode with nodemon
+* npm run debug	Start dev mode with debugging enabled
+* npm start	Start server in production mode
 
-Scripts
-Command	Description
-npm run lint	Lint all .js files under src/
-npm run dev	Start server in dev mode with nodemon
-npm run debug	Start dev mode with debugging enabled
-npm start	Start server in production mode
-Technologies
+## ** Technologies** 
 
-Node.js & Express — Backend framework
+* Node.js & Express — Backend framework
+* Pino — Structured logging
+* Prettier — Automatic code formatting
+* ESLint — Enforces code quality
+* Helmet — Secures HTTP headers
+* Compression — Improves response speed
+* CORS — Cross-origin resource sharing
 
-Pino — Structured logging
-
-Prettier — Automatic code formatting
-
-ESLint — Enforces code quality
-
-Helmet — Secures HTTP headers
-
-Compression — Improves response speed
-
-CORS — Cross-origin resource sharing
 
 
