@@ -27,22 +27,6 @@ This server is built with **Express**, **Pino** for structured logging, and incl
 - **ESLint** for linting and enforcing clean coding standards
 - Cross-platform scripts for easy development with `cross-env` & `nodemon`
 
----
-
-## **Project Structure**
-fragments-backend/
-├── src/
-│ ├── app.js # Express app configuration and routes
-│ ├── logger.js # Pino logger configuration
-│ └── server.js # Entry point for starting the server
-├── .vscode/ # VSCode workspace settings
-├── .prettierrc # Prettier configuration
-├── eslint.config.mjs # ESLint configuration
-├── package.json
-└── README.md
-
-
----
 
 ## **Getting Started**
 
@@ -140,6 +124,7 @@ Example log output:
 * Helmet — Secures HTTP headers
 * Compression — Improves response speed
 * CORS — Cross-origin resource sharing
+
 
 
 
