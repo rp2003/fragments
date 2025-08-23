@@ -74,7 +74,7 @@ node_modules/
 package.json
 package-lock.json
 ```
-## **3. Development **
+## **3. Development**
 
 # Run Linter
 ```bash
@@ -124,6 +124,7 @@ Example log output:
 * Helmet — Secures HTTP headers
 * Compression — Improves response speed
 * CORS — Cross-origin resource sharing
+
 
 
 
